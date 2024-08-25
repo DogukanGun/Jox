@@ -11,7 +11,7 @@ jox = "5xWrz1tgbg3VdyfCfiHQVJnQ4XfFX13Y7L2PT75Yq4GJ"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
+cluster = "http://localhost:8899"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
