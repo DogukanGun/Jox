@@ -6,7 +6,8 @@ skip-lint = false
 
 [programs.localnet]
 jox = "5xWrz1tgbg3VdyfCfiHQVJnQ4XfFX13Y7L2PT75Yq4GJ"
-
+[programs.devnet]
+jox = "5xWrz1tgbg3VdyfCfiHQVJnQ4XfFX13Y7L2PT75Yq4GJ"
 [registry]
 url = "https://api.apr.dev"
 

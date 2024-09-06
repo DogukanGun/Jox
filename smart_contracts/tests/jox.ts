@@ -23,7 +23,7 @@ describe("jox", () => {
 
   const maker = anchor.web3.Keypair.generate();
   const taker = anchor.web3.Keypair.generate();
-  const name = "Test Marketplace63";
+  const name = "Test Marketplace63213";
   const confirm = async (signature: string): Promise<string> => {
     const block = await provider.connection.getLatestBlockhash();
     console.log(block.blockhash)
@@ -61,6 +61,10 @@ describe("jox", () => {
   it("Airdrop", async () => {
     const airdropMaker = await provider.connection.requestAirdrop(maker.publicKey, 20 * anchor.web3.LAMPORTS_PER_SOL).then(confirm);
     const airdropTaker = await provider.connection.requestAirdrop(taker.publicKey, 20 * anchor.web3.LAMPORTS_PER_SOL).then(confirm);
+    let m = await newMintToAta(anchor.getProvider().connection, maker)
+    maker_token = m.mint;
+    maker_ata = m.ata;
+    taker_receive_ata = await getAssociatedTokenAddress(maker_token, taker.publicKey, false, tokenProgram);
     console.log("\nAirdropped 5 SOL to maker", airdropMaker);
     console.log("\nAirdropped 5 SOL to maker", airdropTaker);
   })
@@ -172,6 +176,18 @@ describe("jox", () => {
       confirm(tx)
       console.log("\nApplied for the job");
       console.log("Your transaction signature", tx);
+    } catch (error) {
+      console.error("Error:", error);
+      if (error.message.includes("parse")) {
+        // Specific handling for parse errors
+        console.error("Parsing error occurred:", error);
+      }
+    }
+  })
+  it("Get applications", async ()=>{
+    try {
+      const applicantListData = await program.account.job.fetch(job);
+      console.log("Applicants: ", applicantListData.applicants);
     } catch (error) {
       console.error("Error:", error);
       if (error.message.includes("parse")) {

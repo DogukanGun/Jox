@@ -34,8 +34,13 @@ pub mod jox {
         ctx.accounts.stake(amount)
     }
 
+    pub fn get_applications(ctx: Context<Get>) -> Result<Vec<Applicant>> {
+        ctx.accounts.get_applications()
+    }
+
     pub fn save(ctx:Context<Save>,job_key:Pubkey) -> Result<()>{
         ctx.accounts.save(job_key)
+        
     }
 
     pub fn init(ctx: Context<Initialize>, name: String) -> Result<()> {
